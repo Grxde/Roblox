@@ -5,7 +5,7 @@ Screen.Enabled                  = true
 
 return function(text, x, y)
 
-    local cunt                        = Instance.new("TextLabel", Screen)
+    local cunt = Instance.new("TextLabel", Screen)
     
     cunt.TextStrokeTransparency = 0.00
     cunt.BackgroundTransparency = 0.00
@@ -13,6 +13,8 @@ return function(text, x, y)
     cunt.TextSize               = 20.0
     
     cunt.Visible                = true
+
+    cunt.Font                   = Enum.Font.Sarpanch
     
     cunt.AutomaticSize          = "X"
     cunt.Text                   = text
