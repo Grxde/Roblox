@@ -3,7 +3,7 @@ Screen                          = Instance.new("ScreenGui", game.CoreGui)
 Screen.ResetOnSpawn             = false
 Screen.Enabled                  = true
 
-return function(text)
+return function(text, x, y)
 
     cunt                        = Instance.new("TextLabel", Screen)
     
@@ -17,7 +17,7 @@ return function(text)
     cunt.AutomaticSize          = "X"
     cunt.Text                   = text
     
-    cunt.Position               = UDim2.new(0.0, 0.0, 0.0, 120.0)
+    cunt.Position               = UDim2.new(0.0,   x, 0.0,     y)
     cunt.Size                   = UDim2.new(0.0, 200, 0.0, 25.00)
     
     cunt.BackgroundColor3       = Color3.fromRGB(52.00, 12.00, 91.00)
