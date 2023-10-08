@@ -1,0 +1,29 @@
+Screen                          = Instance.new("ScreenGui", game.CoreGui)
+
+Screen.ResetOnSpawn             = false
+Screen.Enabled                  = true
+
+return function(text)
+
+    cunt                        = Instance.new("TextLabel", Screen)
+    
+    cunt.TextStrokeTransparency = 0.00
+    cunt.BackgroundTransparency = 0.00
+    cunt.BorderSizePixel        = 1.00
+    cunt.TextSize               = 20.0
+    
+    cunt.Visible                = false
+    
+    cunt.AutomaticSize          = "X"
+    cunt.Text                   = text
+    
+    cunt.Position               = UDim2.new(0.0, 0.0, 0.0, 120.0)
+    cunt.Size                   = UDim2.new(0.0, 200, 0.0, 25.00)
+    
+    cunt.BackgroundColor3       = Color3.fromRGB(52.00, 12.00, 91.00)
+    cunt.BorderColor3           = Color3.fromRGB(29.00, 5.000, 52.00)
+    cunt.TextColor3             = Color3.fromRGB(255.0, 255.0, 255.0)
+
+    return cunt
+
+end, Screen
