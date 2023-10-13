@@ -1,0 +1,92 @@
+--[[
+    
+    🤬
+
+    This is quite buggy, I would not recommend replacing normal UIListLayouts.
+    This is only an alternative.
+
+    When Instances are added/removed fast it WILL bug out
+    Future updates may include a fix
+
+    You MUST define global variables in your script before using this.
+    You can use a different version of examples given below (Make sure it works though)
+    I chose to do this in order to debloat my scripts
+
+    #1 Tween function:
+
+        TweenService = game:GetService("TweenService")
+        Tween = function(a,b,c)
+            local tween = TweenService:Create(a,b,c)
+            tween:Play()
+        end
+    
+    #2 scr library:
+
+        scr = loadstring(game:HttpGet('https://pastebin.com/raw/uRj9j4fq'))()
+    
+    you a bum if u paste somebody shit
+    
+    🤬
+    
+]]
+
+local isMidTweening = nil
+return function(ui)
+    ui.ChildAdded:Connect(function(obj)
+        obj.Destroying:Connect(function()
+            task.wait(0.1)
+            local sorting = {}
+            for i, v in pairs (ui:GetChildren()) do
+                if v == obj then
+                    return
+                end
+                sorting[v] = v.Position.Y.Offset
+            end
+            table.sort(sorting, function(a,b)
+                return a < b
+            end)
+            for i, v in pairs (sorting) do
+                Tween(i, TweenInfo.new(1), {Position = UDim2.new(0,0,0,v-36)})
+            end
+            local __id = scr.makerandomstring("----")
+            isMidTweening = __id
+            delay(1.2, function()
+                if isMidTweening ~= __id then
+                    return
+                end
+                isMidTweening = nil
+            end)
+        end)
+        local yMax = 0
+        if not isMidTweening then
+            for _, v in pairs (ui:GetChildren()) do
+                if v == obj or v.Position.Y.Offset < yMax then
+                    continue
+                end
+                yMax = v.Position.Y.Offset
+            end
+            obj.Position = UDim2.new(0,0,0,yMax+36)
+            return
+        end
+        local thingy = nil
+        for _, v in pairs (ui:GetChildren()) do
+            if v == obj or v.Active or v.Position.Y.Offset < yMax then
+                continue
+            end
+            yMax = v.Position.Y.Offset
+            thingy = v
+        end
+        if not thingy then
+            return
+        end
+        thingy.Active = true
+        local aaaa, bbbb = nil, tick()
+        aaaa = thingy:GetPropertyChangedSignal("Position"):Connect(function()
+            bbbb = tick()
+            obj.Position = UDim2.new(0,0,0,thingy.Position.Y.Offset+36)
+        end)
+        repeat wait() until tick()-bbbb > 1
+        aaaa:Disconnect()
+        thingy.Active = false
+    end)
+end
